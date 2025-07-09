@@ -34,7 +34,7 @@ def main():
     
     try:
         # 게임 인스턴스 생성 및 실행
-        game = Game(screen_width=800, screen_height=600)
+        game = Game(screen_width=1400, screen_height=900)
         game.run()
     except Exception as e:
         print(f"An error occurred while running the game: {e}")
