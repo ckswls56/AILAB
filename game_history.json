@@ -1,0 +1,131 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2025-07-09T16:05:35.188327",
+    "game_mode": "2-Player",
+    "winner": 2,
+    "is_draw": false,
+    "duration": 18.592088,
+    "total_moves": 14,
+    "moves": [
+      {
+        "player": 2,
+        "position": [
+          3,
+          3
+        ],
+        "timestamp": "2025-07-09T16:05:25.163881"
+      },
+      {
+        "player": 1,
+        "position": [
+          4,
+          4
+        ],
+        "timestamp": "2025-07-09T16:05:26.211010"
+      },
+      {
+        "player": 2,
+        "position": [
+          5,
+          3
+        ],
+        "timestamp": "2025-07-09T16:05:26.991263"
+      },
+      {
+        "player": 1,
+        "position": [
+          6,
+          4
+        ],
+        "timestamp": "2025-07-09T16:05:27.772866"
+      },
+      {
+        "player": 2,
+        "position": [
+          6,
+          3
+        ],
+        "timestamp": "2025-07-09T16:05:28.658633"
+      },
+      {
+        "player": 1,
+        "position": [
+          7,
+          3
+        ],
+        "timestamp": "2025-07-09T16:05:29.495549"
+      },
+      {
+        "player": 2,
+        "position": [
+          7,
+          4
+        ],
+        "timestamp": "2025-07-09T16:05:30.506202"
+      },
+      {
+        "player": 1,
+        "position": [
+          7,
+          5
+        ],
+        "timestamp": "2025-07-09T16:05:31.119775"
+      },
+      {
+        "player": 2,
+        "position": [
+          6,
+          5
+        ],
+        "timestamp": "2025-07-09T16:05:31.734226"
+      },
+      {
+        "player": 1,
+        "position": [
+          5,
+          5
+        ],
+        "timestamp": "2025-07-09T16:05:32.441536"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          5
+        ],
+        "timestamp": "2025-07-09T16:05:33.455304"
+      },
+      {
+        "player": 1,
+        "position": [
+          4,
+          6
+        ],
+        "timestamp": "2025-07-09T16:05:34.085905"
+      },
+      {
+        "player": 2,
+        "position": [
+          3,
+          6
+        ],
+        "timestamp": "2025-07-09T16:05:34.683588"
+      },
+      {
+        "player": 2,
+        "position": [
+          3,
+          7
+        ],
+        "timestamp": "2025-07-09T16:05:35.185135"
+      }
+    ],
+    "board_size": 10,
+    "ai_performance": {
+      "wins": 0,
+      "losses": 0,
+      "draws": 0
+    }
+  }
+]

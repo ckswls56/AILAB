@@ -164,7 +164,11 @@ class Renderer:
             "2 key - AI Battle mode",
             "S key - Toggle sound",
             "M key - Toggle music",
-            "T key - Show statistics"
+            "T key - Show statistics",
+            "H key - Show history",
+            "L key - Start replay",
+            "Arrow keys - Navigate replay",
+            "SPACE - Stop replay"
         ]
         
         y_offset = self.screen_height - 150
@@ -225,4 +229,38 @@ class Renderer:
         Returns:
             int: 셀 크기
         """
-        return self.cell_size 
+        return self.cell_size
+    
+    def render_replay_info(self, surface: pygame.Surface, replay_info: dict):
+        """
+        리플레이 정보 렌더링
+        
+        Args:
+            surface (pygame.Surface): 그릴 서피스
+            replay_info (dict): 리플레이 정보
+        """
+        if not replay_info:
+            return
+        
+        # 리플레이 정보 텍스트
+        info_text = f"Replay: Game {replay_info['game_id']} - Move {replay_info['current_move']}/{replay_info['total_moves']}"
+        info_surface = self.info_font.render(info_text, True, self.colors['highlight'])
+        surface.blit(info_surface, (self.screen_width // 2 - 150, 20))
+        
+        # 게임 모드 정보
+        mode_text = f"Mode: {replay_info['game_mode']}"
+        mode_surface = self.small_font.render(mode_text, True, self.colors['text'])
+        surface.blit(mode_surface, (self.screen_width // 2 - 100, 50))
+        
+        # 승자 정보
+        if replay_info['is_draw']:
+            winner_text = "Result: Draw"
+        else:
+            winner_text = f"Winner: Player {replay_info['winner']}"
+        winner_surface = self.small_font.render(winner_text, True, self.colors['text'])
+        surface.blit(winner_surface, (self.screen_width // 2 - 100, 75))
+        
+        # 리플레이 컨트롤 안내
+        controls_text = "Use LEFT/RIGHT arrows to navigate, SPACE to stop"
+        controls_surface = self.small_font.render(controls_text, True, self.colors['highlight'])
+        surface.blit(controls_surface, (self.screen_width // 2 - 200, self.screen_height - 50)) 

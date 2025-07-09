@@ -11,6 +11,7 @@ from ai import AI
 from utils import screen_to_board_pos
 from sound_manager import SoundManager
 from game_stats import GameStats
+from game_history import GameHistory
 
 
 class Game:
@@ -38,6 +39,7 @@ class Game:
         self.ai = AI(player=2)  # AI는 백돌
         self.sound_manager = SoundManager()
         self.game_stats = GameStats()
+        self.game_history = GameHistory()
         
         # 게임 상태
         self.game_mode = "2-Player"  # "2-Player" 또는 "AI Battle"
@@ -87,6 +89,16 @@ class Game:
             self.sound_manager.toggle_music()
         elif key == pygame.K_t:
             self.show_statistics()
+        elif key == pygame.K_h:
+            self.show_history()
+        elif key == pygame.K_l:
+            self.start_replay_mode()
+        elif key == pygame.K_RIGHT:
+            self.next_replay_move()
+        elif key == pygame.K_LEFT:
+            self.previous_replay_move()
+        elif key == pygame.K_SPACE:
+            self.stop_replay()
     
     def handle_mouse_click(self, pos):
         """마우스 클릭 처리"""
@@ -154,6 +166,66 @@ class Game:
         print(f"AI Performance - Wins: {stats['ai_performance']['wins']}, Losses: {stats['ai_performance']['losses']}, Win Rate: {stats['ai_performance']['win_rate']:.1f}%")
         print("="*50)
     
+    def show_history(self):
+        """게임 히스토리 표시"""
+        recent_games = self.game_history.get_recent_games(10)
+        print("\n" + "="*50)
+        print("RECENT GAMES")
+        print("="*50)
+        if not recent_games:
+            print("No games played yet.")
+        else:
+            for game in recent_games:
+                winner_text = "Draw" if game['is_draw'] else f"Player {game['winner']}"
+                print(f"Game {game['id']}: {game['game_mode']} - {winner_text} ({game['total_moves']} moves)")
+        print("="*50)
+    
+    def start_replay_mode(self):
+        """리플레이 모드 시작"""
+        recent_games = self.game_history.get_recent_games(5)
+        if not recent_games:
+            print("No games available for replay.")
+            return
+        
+        print("\n" + "="*50)
+        print("SELECT GAME TO REPLAY")
+        print("="*50)
+        for game in recent_games:
+            winner_text = "Draw" if game['is_draw'] else f"Player {game['winner']}"
+            print(f"{game['id']}: {game['game_mode']} - {winner_text}")
+        
+        try:
+            game_id = int(input("Enter game ID to replay: "))
+            if self.game_history.start_replay(game_id):
+                print(f"Started replay of game {game_id}")
+                print("Use LEFT/RIGHT arrows to navigate, SPACE to stop")
+            else:
+                print("Invalid game ID")
+        except ValueError:
+            print("Invalid input")
+    
+    def next_replay_move(self):
+        """리플레이에서 다음 수로 이동"""
+        if self.game_history.is_replaying:
+            if self.game_history.next_move():
+                self.sound_manager.play_click()
+            else:
+                print("End of replay")
+    
+    def previous_replay_move(self):
+        """리플레이에서 이전 수로 이동"""
+        if self.game_history.is_replaying:
+            if self.game_history.previous_move():
+                self.sound_manager.play_click()
+            else:
+                print("Beginning of replay")
+    
+    def stop_replay(self):
+        """리플레이 중지"""
+        if self.game_history.is_replaying:
+            self.game_history.stop_replay()
+            print("Replay stopped")
+    
     def update(self):
         """게임 상태 업데이트"""
         # 게임 종료 조건 확인
@@ -162,6 +234,19 @@ class Game:
         if game_over:
             # 게임 종료 처리
             self.game_stats.end_game(winner, game_over)
+            
+            # 히스토리에 게임 추가
+            game_data = {
+                'game_mode': self.game_mode,
+                'winner': winner,
+                'is_draw': not winner,
+                'duration': self.game_stats.current_game['duration'],
+                'total_moves': len(self.game_stats.current_game['moves']),
+                'moves': self.game_stats.current_game['moves'],
+                'board_size': self.board.size,
+                'ai_performance': self.game_stats.stats['ai_performance']
+            }
+            self.game_history.add_game(game_data)
             
             if winner:
                 self.sound_manager.play_win()
@@ -175,8 +260,20 @@ class Game:
         # 배경 그리기
         self.screen.fill(self.renderer.colors['background'])
         
-        # 보드 렌더링
-        self.renderer.render_board(self.screen, self.board)
+        # 리플레이 모드인지 확인
+        if self.game_history.is_replaying:
+            replay_board = self.game_history.get_replay_board()
+            if replay_board:
+                # 리플레이 보드 렌더링
+                self.renderer.render_board(self.screen, replay_board)
+                # 리플레이 정보 표시
+                self.renderer.render_replay_info(self.screen, self.game_history.get_replay_info())
+            else:
+                # 일반 보드 렌더링
+                self.renderer.render_board(self.screen, self.board)
+        else:
+            # 일반 보드 렌더링
+            self.renderer.render_board(self.screen, self.board)
         
         # UI 렌더링
         self.renderer.render_ui(self.screen, self.board, self.game_mode)

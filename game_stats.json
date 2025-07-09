@@ -1,17 +1,17 @@
 {
-  "total_games": 1,
+  "total_games": 2,
   "games_won": {
     "black": 1,
-    "white": 0,
+    "white": 1,
     "draw": 0
   },
   "game_modes": {
-    "2-Player": 1,
+    "2-Player": 2,
     "AI Battle": 0
   },
-  "average_game_duration": 10.320868,
-  "total_moves": 9,
-  "longest_game": 10.320868,
+  "average_game_duration": 14.456478,
+  "total_moves": 23,
+  "longest_game": 18.592088,
   "shortest_game": 10.320868,
   "game_history": [
     {
@@ -92,6 +92,127 @@
             7
           ],
           "timestamp": "2025-07-09T15:52:24.197801"
+        }
+      ]
+    },
+    {
+      "date": "2025-07-09T16:05:35.185187",
+      "mode": "2-Player",
+      "winner": "white",
+      "duration": 18.592088,
+      "moves": 14,
+      "moves_detail": [
+        {
+          "player": 2,
+          "position": [
+            3,
+            3
+          ],
+          "timestamp": "2025-07-09T16:05:25.163881"
+        },
+        {
+          "player": 1,
+          "position": [
+            4,
+            4
+          ],
+          "timestamp": "2025-07-09T16:05:26.211010"
+        },
+        {
+          "player": 2,
+          "position": [
+            5,
+            3
+          ],
+          "timestamp": "2025-07-09T16:05:26.991263"
+        },
+        {
+          "player": 1,
+          "position": [
+            6,
+            4
+          ],
+          "timestamp": "2025-07-09T16:05:27.772866"
+        },
+        {
+          "player": 2,
+          "position": [
+            6,
+            3
+          ],
+          "timestamp": "2025-07-09T16:05:28.658633"
+        },
+        {
+          "player": 1,
+          "position": [
+            7,
+            3
+          ],
+          "timestamp": "2025-07-09T16:05:29.495549"
+        },
+        {
+          "player": 2,
+          "position": [
+            7,
+            4
+          ],
+          "timestamp": "2025-07-09T16:05:30.506202"
+        },
+        {
+          "player": 1,
+          "position": [
+            7,
+            5
+          ],
+          "timestamp": "2025-07-09T16:05:31.119775"
+        },
+        {
+          "player": 2,
+          "position": [
+            6,
+            5
+          ],
+          "timestamp": "2025-07-09T16:05:31.734226"
+        },
+        {
+          "player": 1,
+          "position": [
+            5,
+            5
+          ],
+          "timestamp": "2025-07-09T16:05:32.441536"
+        },
+        {
+          "player": 2,
+          "position": [
+            4,
+            5
+          ],
+          "timestamp": "2025-07-09T16:05:33.455304"
+        },
+        {
+          "player": 1,
+          "position": [
+            4,
+            6
+          ],
+          "timestamp": "2025-07-09T16:05:34.085905"
+        },
+        {
+          "player": 2,
+          "position": [
+            3,
+            6
+          ],
+          "timestamp": "2025-07-09T16:05:34.683588"
+        },
+        {
+          "player": 2,
+          "position": [
+            3,
+            7
+          ],
+          "timestamp": "2025-07-09T16:05:35.185135"
         }
       ]
     }
