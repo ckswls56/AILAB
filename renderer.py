@@ -161,7 +161,10 @@ class Renderer:
             "R key - Restart game",
             "ESC key - Exit game",
             "1 key - 2-Player mode",
-            "2 key - AI Battle mode"
+            "2 key - AI Battle mode",
+            "S key - Toggle sound",
+            "M key - Toggle music",
+            "T key - Show statistics"
         ]
         
         y_offset = self.screen_height - 150
