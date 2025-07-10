@@ -204,19 +204,6 @@ class Renderer:
         
         # Controls 섹션 (중간)
         controls_y = info_y + 200
-        draw_text_with_shadow(surface, "Controls:", self.info_font, self.colors['highlight'], (info_x, controls_y))
-        
-        # 디버그 모드 컨트롤 추가
-        debug_controls = [
-            "F1: Debug Mode",
-            "F2: Auto Test",
-            "F3: Validate State"
-        ]
-        
-        for i, control in enumerate(debug_controls):
-            draw_text_with_shadow(surface, control, self.small_font, self.colors['text'], 
-                                (info_x, controls_y + 40 + i * 25))
-        controls_y = 200
         draw_text_with_shadow(surface, "GAME CONTROLS", self.info_font, self.colors['highlight'], (info_x, controls_y))
         
         game_controls = [
@@ -230,10 +217,10 @@ class Renderer:
         
         for i, control in enumerate(game_controls):
             draw_text_with_shadow(surface, control, self.small_font, self.colors['text'], 
-                               (info_x, controls_y + 40 + i * 20))
+                               (info_x, controls_y + 40 + i * 25))
         
         # 사운드 컨트롤
-        sound_y = controls_y + 160
+        sound_y = controls_y + 200
         draw_text_with_shadow(surface, "SOUND CONTROLS", self.info_font, self.colors['highlight'], (info_x, sound_y))
         
         sound_controls = [
@@ -243,7 +230,7 @@ class Renderer:
         
         for i, control in enumerate(sound_controls):
             draw_text_with_shadow(surface, control, self.small_font, self.colors['text'], 
-                               (info_x, sound_y + 40 + i * 20))
+                               (info_x, sound_y + 40 + i * 25))
         
         # 리플레이 컨트롤
         replay_y = sound_y + 120
@@ -261,7 +248,7 @@ class Renderer:
         
         for i, control in enumerate(replay_controls):
             draw_text_with_shadow(surface, control, self.small_font, self.colors['text'], 
-                               (info_x, replay_y + 40 + i * 20))
+                               (info_x, replay_y + 40 + i * 25))
         
         # AI 계산 중 로딩 애니메이션 (바둑판 위에 표시)
         if ai_thinking and game_mode == "AI Battle":

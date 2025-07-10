@@ -99,9 +99,6 @@ class Game:
         self.frame_count = 0
         self.fps_start_time = time.time()
         self.last_fps = 60.0
-        
-        # 설정 로드
-        self.load_settings()
     
     def show_loading_screen(self):
         """로딩 화면 표시"""
@@ -165,12 +162,6 @@ class Game:
                     self.validate_game_state()
                 elif key == pygame.K_F4:  # 설정 메뉴
                     self.ui_mode = 'settings'
-                elif key == pygame.K_F5:  # 통계 내보내기
-                    self.export_statistics()
-                elif key == pygame.K_F6:  # 게임 저장
-                    self.save_game()
-                elif key == pygame.K_F7:  # 게임 불러오기
-                    self.load_game()
             elif self.ui_mode == 'stats' or self.ui_mode == 'history' or self.ui_mode == 'message':
                 if key == pygame.K_ESCAPE:
                     self.ui_mode = 'normal'
