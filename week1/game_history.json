@@ -2597,5 +2597,304 @@
       "losses": 8,
       "draws": 0
     }
+  },
+  {
+    "id": 24,
+    "timestamp": "2025-07-10T09:18:48.038644",
+    "game_mode": "AI Battle",
+    "winner": 1,
+    "is_draw": false,
+    "duration": 6.796908,
+    "total_moves": 11,
+    "moves": [
+      {
+        "player": 2,
+        "position": [
+          5,
+          4
+        ],
+        "timestamp": "2025-07-10T09:18:41.711979"
+      },
+      {
+        "player": 1,
+        "position": [
+          3,
+          4
+        ],
+        "timestamp": "2025-07-10T09:18:42.131279"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          4
+        ],
+        "timestamp": "2025-07-10T09:18:42.868328"
+      },
+      {
+        "player": 1,
+        "position": [
+          2,
+          6
+        ],
+        "timestamp": "2025-07-10T09:18:43.278359"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          5
+        ],
+        "timestamp": "2025-07-10T09:18:44.025631"
+      },
+      {
+        "player": 1,
+        "position": [
+          4,
+          3
+        ],
+        "timestamp": "2025-07-10T09:18:44.427700"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          6
+        ],
+        "timestamp": "2025-07-10T09:18:45.545639"
+      },
+      {
+        "player": 1,
+        "position": [
+          1,
+          4
+        ],
+        "timestamp": "2025-07-10T09:18:45.955765"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          7
+        ],
+        "timestamp": "2025-07-10T09:18:46.775289"
+      },
+      {
+        "player": 1,
+        "position": [
+          2,
+          4
+        ],
+        "timestamp": "2025-07-10T09:18:47.422364"
+      },
+      {
+        "player": 1,
+        "position": [
+          4,
+          8
+        ],
+        "timestamp": "2025-07-10T09:18:48.031082"
+      }
+    ],
+    "board_size": 10,
+    "ai_performance": {
+      "wins": 1,
+      "losses": 10,
+      "draws": 0
+    }
+  },
+  {
+    "id": 25,
+    "timestamp": "2025-07-10T09:18:59.865871",
+    "game_mode": "2-Player",
+    "winner": 1,
+    "is_draw": false,
+    "duration": 6.645393,
+    "total_moves": 9,
+    "moves": [
+      {
+        "player": 2,
+        "position": [
+          4,
+          3
+        ],
+        "timestamp": "2025-07-10T09:18:53.651325"
+      },
+      {
+        "player": 1,
+        "position": [
+          5,
+          3
+        ],
+        "timestamp": "2025-07-10T09:18:54.541644"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          4
+        ],
+        "timestamp": "2025-07-10T09:18:55.223332"
+      },
+      {
+        "player": 1,
+        "position": [
+          5,
+          4
+        ],
+        "timestamp": "2025-07-10T09:18:55.990645"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          5
+        ],
+        "timestamp": "2025-07-10T09:18:56.673280"
+      },
+      {
+        "player": 1,
+        "position": [
+          5,
+          5
+        ],
+        "timestamp": "2025-07-10T09:18:57.279735"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          6
+        ],
+        "timestamp": "2025-07-10T09:18:57.980361"
+      },
+      {
+        "player": 1,
+        "position": [
+          5,
+          6
+        ],
+        "timestamp": "2025-07-10T09:18:58.661384"
+      },
+      {
+        "player": 1,
+        "position": [
+          4,
+          7
+        ],
+        "timestamp": "2025-07-10T09:18:59.857710"
+      }
+    ],
+    "board_size": 10,
+    "ai_performance": {
+      "wins": 1,
+      "losses": 10,
+      "draws": 0
+    }
+  },
+  {
+    "id": 26,
+    "timestamp": "2025-07-10T09:32:42.739409",
+    "game_mode": "AI Battle",
+    "winner": 1,
+    "is_draw": false,
+    "duration": 817.01078,
+    "total_moves": 11,
+    "moves": [
+      {
+        "player": 2,
+        "position": [
+          4,
+          3
+        ],
+        "timestamp": "2025-07-10T09:19:06.422173"
+      },
+      {
+        "player": 1,
+        "position": [
+          2,
+          7
+        ],
+        "timestamp": "2025-07-10T09:19:06.827216"
+      },
+      {
+        "player": 2,
+        "position": [
+          5,
+          4
+        ],
+        "timestamp": "2025-07-10T09:19:07.377805"
+      },
+      {
+        "player": 1,
+        "position": [
+          3,
+          6
+        ],
+        "timestamp": "2025-07-10T09:19:08.048018"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          4
+        ],
+        "timestamp": "2025-07-10T09:19:09.891648"
+      },
+      {
+        "player": 1,
+        "position": [
+          2,
+          6
+        ],
+        "timestamp": "2025-07-10T09:19:10.564410"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          5
+        ],
+        "timestamp": "2025-07-10T09:19:11.107851"
+      },
+      {
+        "player": 1,
+        "position": [
+          2,
+          5
+        ],
+        "timestamp": "2025-07-10T09:19:11.760289"
+      },
+      {
+        "player": 2,
+        "position": [
+          4,
+          6
+        ],
+        "timestamp": "2025-07-10T09:19:12.739287"
+      },
+      {
+        "player": 1,
+        "position": [
+          4,
+          7
+        ],
+        "timestamp": "2025-07-10T09:19:13.380391"
+      },
+      {
+        "player": 1,
+        "position": [
+          4,
+          2
+        ],
+        "timestamp": "2025-07-10T09:32:42.732235"
+      }
+    ],
+    "board_size": 10,
+    "ai_performance": {
+      "wins": 1,
+      "losses": 10,
+      "draws": 0
+    }
   }
 ]

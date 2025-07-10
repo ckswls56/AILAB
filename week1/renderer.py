@@ -425,8 +425,8 @@ class Renderer:
         surface.blit(controls_surface, (self.screen_width // 2 - 200, self.screen_height - 50)) 
 
     def get_popup_rect(self) -> pygame.Rect:
-        width = 700  # 500에서 700으로 증가
-        height = 600  # 400에서 600으로 증가
+        width = 900  # 700에서 900으로 증가
+        height = 700  # 600에서 700으로 증가
         x = (self.screen_width - width) // 2
         y = (self.screen_height - height) // 2
         return pygame.Rect(x, y, width, height)
@@ -436,17 +436,46 @@ class Renderer:
         pygame.draw.rect(surface, (30, 30, 30), rect, border_radius=16)
         pygame.draw.rect(surface, self.colors['highlight'], rect, 3, border_radius=16)
         draw_text_with_shadow(surface, "Game Statistics", self.title_font, self.colors['highlight'], (rect.x + 30, rect.y + 20))
-        lines = [
-            f"Total Games: {stats['total_games']}",
-            f"Win Rate - Black: {stats['win_rate']['black']:.1f}%, White: {stats['win_rate']['white']:.1f}%, Draw: {stats['win_rate']['draw']:.1f}%",
-            f"Average Duration: {stats['average_duration']:.1f} sec",
-            f"Average Moves: {stats['average_moves']:.1f}",
-            f"Longest Game: {stats['longest_game']:.1f} sec",
-            f"Shortest Game: {stats['shortest_game']:.1f} sec",
-            f"AI Wins: {stats['ai_performance']['wins']}, Losses: {stats['ai_performance']['losses']}, Win Rate: {stats['ai_performance']['win_rate']:.1f}%"
-        ]
-        for i, line in enumerate(lines):
-            draw_text_with_shadow(surface, line, self.info_font, self.colors['text'], (rect.x + 30, rect.y + 80 + i * 45))  # 간격 35에서 45로 증가
+        
+        # 통계 정보를 여러 줄로 나누어 표시
+        y_offset = 80
+        line_height = 35
+        
+        # 총 게임 수
+        draw_text_with_shadow(surface, f"Total Games: {stats['total_games']}", self.info_font, self.colors['text'], (rect.x + 30, rect.y + y_offset))
+        y_offset += line_height
+        
+        # 승률 정보 (여러 줄로 분할)
+        draw_text_with_shadow(surface, "Win Rates:", self.info_font, self.colors['highlight'], (rect.x + 30, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"  Black: {stats['win_rate']['black']:.1f}%", self.info_font, self.colors['text'], (rect.x + 50, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"  White: {stats['win_rate']['white']:.1f}%", self.info_font, self.colors['text'], (rect.x + 50, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"  Draw: {stats['win_rate']['draw']:.1f}%", self.info_font, self.colors['text'], (rect.x + 50, rect.y + y_offset))
+        y_offset += line_height + 10
+        
+        # 게임 시간 정보
+        draw_text_with_shadow(surface, f"Average Duration: {stats['average_duration']:.1f} sec", self.info_font, self.colors['text'], (rect.x + 30, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"Longest Game: {stats['longest_game']:.1f} sec", self.info_font, self.colors['text'], (rect.x + 30, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"Shortest Game: {stats['shortest_game']:.1f} sec", self.info_font, self.colors['text'], (rect.x + 30, rect.y + y_offset))
+        y_offset += line_height + 10
+        
+        # 평균 수
+        draw_text_with_shadow(surface, f"Average Moves: {stats['average_moves']:.1f}", self.info_font, self.colors['text'], (rect.x + 30, rect.y + y_offset))
+        y_offset += line_height + 10
+        
+        # AI 성능 정보 (여러 줄로 분할)
+        draw_text_with_shadow(surface, "AI Performance:", self.info_font, self.colors['highlight'], (rect.x + 30, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"  Wins: {stats['ai_performance']['wins']}", self.info_font, self.colors['text'], (rect.x + 50, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"  Losses: {stats['ai_performance']['losses']}", self.info_font, self.colors['text'], (rect.x + 50, rect.y + y_offset))
+        y_offset += line_height
+        draw_text_with_shadow(surface, f"  Win Rate: {stats['ai_performance']['win_rate']:.1f}%", self.info_font, self.colors['text'], (rect.x + 50, rect.y + y_offset))
+        
         draw_text_with_shadow(surface, "ESC to close", self.small_font, self.colors['highlight'], (rect.x + 30, rect.y + rect.height - 40))
 
     def render_history_popup(self, surface, games):
