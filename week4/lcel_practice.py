@@ -13,6 +13,11 @@ from langchain_core.runnables import RunnableParallel
 from pydantic import BaseModel, Field
 from typing import Literal
 import json
+import os
+from dotenv import load_dotenv
+
+# 환경 변수 로드
+load_dotenv()
 
 # 1. 기본 요약 및 감정 분석 체인
 
@@ -123,8 +128,14 @@ def create_sequential_chain():
 def main():
     """메인 실행 함수"""
     
+    # OpenAI API 키 확인
+    if not os.getenv("OPENAI_API_KEY"):
+        print("❌ OPENAI_API_KEY 환경 변수를 설정해주세요!")
+        print("env_example.txt 파일을 참고하여 .env 파일을 생성하세요.")
+        return
+    
     # 테스트 텍스트
-    text = """오늘 아침 일어나서 시험 준비를 위해 마지막으로 복습을 했다. 
+    text = """오늘 아침 일어나서 시험 준비를 위해 마지막으로 복습을 했다.
 시험장에 들어가서 문제를 풀 때는 긴장했지만, 평소에 열심히 공부했던 내용들이 잘 기억났다.
 시험 시간이 끝나고 답안지를 제출할 때는 자신감이 있었다.
 결과를 확인했을 때 만점을 받았다는 것을 알게 되었고, 그 순간 정말 기뻤다.
