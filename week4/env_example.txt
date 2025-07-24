@@ -1,0 +1,9 @@
+# OpenAI API 키 설정
+OPENAI_API_KEY=your_openai_api_key_here
+
+# PostgreSQL 연결 설정 (선택사항 - 기본값 사용)
+# DB_HOST=localhost
+# DB_PORT=5432
+# DB_NAME=postgres
+# DB_USER=postgres
+# DB_PASSWORD=123456789 
