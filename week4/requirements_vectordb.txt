@@ -1,0 +1,6 @@
+psycopg2-binary==2.9.9
+numpy==1.24.3
+langchain-openai==0.1.0
+langchain-core==0.1.0
+python-dotenv==1.0.0
+pydantic==2.5.0 
