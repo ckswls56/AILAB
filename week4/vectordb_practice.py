@@ -16,9 +16,6 @@ from langchain_core.documents import Document
 import os
 from dotenv import load_dotenv
 
-# 환경 변수 로드
-load_dotenv()
-
 def vector_to_string(vector):
     """벡터를 PostgreSQL vector 타입 문자열로 변환"""
     if isinstance(vector, list):
@@ -27,6 +24,9 @@ def vector_to_string(vector):
         return f"[{','.join(map(str, vector.tolist()))}]"
     else:
         return str(vector)
+
+# 환경 변수 로드
+load_dotenv()
 
 class VectorDatabase:
     """PostgreSQL + pgvector를 사용한 벡터 데이터베이스 클래스"""
@@ -121,6 +121,35 @@ class VectorDatabase:
             if conn:
                 conn.close()
     
+    def add_documents(self, documents: List[Document]) -> bool:
+        """여러 문서 일괄 추가"""
+        try:
+            conn = self.connect()
+            if not conn:
+                return False
+                
+            with conn.cursor() as cursor:
+                for doc in documents:
+                    # 임베딩 생성
+                    embedding = self.embeddings.embed_query(doc.page_content)
+                    vector_str = vector_to_string(embedding)
+                    
+                    cursor.execute("""
+                        INSERT INTO documents (content, metadata, embedding)
+                        VALUES (%s, %s, %s::vector)
+                    """, (doc.page_content, json.dumps(doc.metadata) if doc.metadata else None, vector_str))
+                
+                conn.commit()
+                print(f"{len(documents)}개 문서 추가 완료")
+                return True
+                
+        except Exception as e:
+            print(f"문서 일괄 추가 실패: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
+    
     def search_similar(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
         """유사도 검색"""
         try:
@@ -174,6 +203,31 @@ class VectorDatabase:
         finally:
             if conn:
                 conn.close()
+    
+    def delete_document(self, doc_id: int) -> bool:
+        """문서 삭제"""
+        try:
+            conn = self.connect()
+            if not conn:
+                return False
+                
+            with conn.cursor() as cursor:
+                cursor.execute("DELETE FROM documents WHERE id = %s", (doc_id,))
+                conn.commit()
+                
+                if cursor.rowcount > 0:
+                    print(f"문서 {doc_id} 삭제 완료")
+                    return True
+                else:
+                    print(f"문서 {doc_id}를 찾을 수 없습니다")
+                    return False
+                    
+        except Exception as e:
+            print(f"문서 삭제 실패: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
 
 def main():
     """메인 실행 함수"""
@@ -205,7 +259,10 @@ def main():
         "머신러닝은 데이터로부터 패턴을 학습하여 예측이나 분류를 수행하는 인공지능의 한 분야입니다.",
         "딥러닝은 인공신경망을 기반으로 한 머신러닝 기법으로, 복잡한 패턴을 학습할 수 있습니다.",
         "자연어처리는 인간의 언어를 컴퓨터가 이해하고 처리할 수 있도록 하는 기술입니다.",
-        "컴퓨터 비전은 컴퓨터가 디지털 이미지나 비디오로부터 의미 있는 정보를 추출하고 이해하는 기술입니다."
+        "컴퓨터 비전은 컴퓨터가 디지털 이미지나 비디오로부터 의미 있는 정보를 추출하고 이해하는 기술입니다.",
+        "강화학습은 에이전트가 환경과 상호작용하며 보상을 최대화하는 행동을 학습하는 방법입니다.",
+        "데이터 마이닝은 대용량 데이터에서 유용한 패턴이나 지식을 발견하는 과정입니다.",
+        "빅데이터는 기존 데이터베이스 관리도구의 능력을 넘어서는 대용량의 정형 또는 비정형 데이터를 의미합니다."
     ]
     
     # 문서 추가
@@ -229,7 +286,8 @@ def main():
     search_queries = [
         "인공지능과 머신러닝의 차이점",
         "자연어 처리 기술",
-        "데이터 분석 방법"
+        "데이터 분석 방법",
+        "컴퓨터가 이미지를 이해하는 방법"
     ]
     
     for query in search_queries:

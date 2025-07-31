@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+streamlit
+langchain
+langgraph
+httpx
+python-dotenv

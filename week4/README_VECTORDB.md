@@ -166,7 +166,6 @@ pip install -r requirements_vectordb.txt
 - [OpenAI Embeddings API](https://platform.openai.com/docs/guides/embeddings)
 - [LangChain 문서](https://python.langchain.com/)
 
-
 ## 📝 라이선스
 
 이 프로젝트는 교육 목적으로 제작되었습니다. 
