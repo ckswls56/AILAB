@@ -194,3 +194,12 @@ Thumbs.db
 *.tmp
 *.temp 
 *.env
+
+# ChromaDB and large data files
+week5/chroma_db/
+*.bin
+*.db
+*.sqlite3
+
+# Files containing sensitive tokens
+docs/repomix-output-astral-sh-uv.md
