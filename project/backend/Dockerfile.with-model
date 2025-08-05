@@ -1,0 +1,79 @@
+# 🚀 극한 최적화 Multi-stage build (모델 포함 버전)
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+# 빌드 도구 설치 (최소한만)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    libffi-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements (build context가 프로젝트 루트이므로)
+COPY backend/requirements.txt .
+
+# Create virtual environment and install dependencies
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# 🎯 안정적인 패키지 설치 (의존성 보존)
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --trusted-host files.pythonhosted.org --no-cache-dir -r requirements.txt && \
+    pip install --trusted-host download.pytorch.org --no-cache-dir \
+        torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 \
+        --index-url https://download.pytorch.org/whl/cpu || \
+    pip install --no-cache-dir torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1
+
+# 🗑️ 극한 정리: 불필요한 파일들 제거 (더 강화)
+RUN find /opt/venv -name "*.pyc" -delete && \
+    pip cache purge
+
+# 🏭 Production stage - 최소 런타임
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# 런타임 의존성 및 OCR 패키지 설치
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    libffi8 \
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    tesseract-ocr-kor \
+    tesseract-ocr-osd \
+    poppler-utils \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Copy virtual environment from builder
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# 🧹 최종 정리 한번 더
+RUN find /opt/venv -name "*.pyc" -delete
+
+# 🤖 모델 파일들 복사 (이미지에 포함)
+COPY all-MiniLM-L6-v2 /app/all-MiniLM-L6-v2
+
+# Copy application code (only production files) - build context가 프로젝트 루트이므로
+COPY backend/main.py backend/pdf_processor.py backend/qa_service.py backend/database.py backend/models.py backend/llm_client.py ./
+
+# Create directories
+RUN mkdir -p uploads data
+
+# Create non-root user for security (Debian 스타일)
+RUN useradd --create-home --shell /bin/sh app && \
+    chown -R app:app /app
+USER app
+
+# Expose port
+EXPOSE 8000
+
+# Optimized health check (lighter)
+HEALTHCHECK --interval=60s --timeout=10s --start-period=10s --retries=2 \
+    CMD python -c "import socket; socket.create_connection(('localhost', 8000), timeout=5)" || exit 1
+
+# Run the application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

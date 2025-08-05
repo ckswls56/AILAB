@@ -1,0 +1,105 @@
+# 🚀 극한 최적화용 .dockerignore
+
+# Development files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+.spyderproject
+.spyproject
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# Documentation (모든 문서 제외)
+README.md
+*.md
+docs/
+documentation/
+examples/
+
+# Test files (모든 테스트 파일 제외)
+test_*
+*_test.py
+tests/
+*test.py
+conftest.py
+.pytest_cache/
+.coverage
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Logs and monitoring
+*.log
+logs/
+*.out
+*.err
+
+# Cache directories
+.cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Data files (런타임에 생성되는 것들)
+data/
+uploads/
+*.csv
+*.json
+*.parquet
+*.pickle
+*.pkl
+
+# Docker files (재귀 방지)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Virtual environments
+bin/
+lib/
+lib64/
+share/
+pyvenv.cfg
+Scripts/
+Include/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.dist-info/
+.eggs/
+
+# 최적화 가이드 파일들 (운영에 불필요)
+extreme_optimize_guide.md
+*_GUIDE.md
+MIGRATION_GUIDE.md
